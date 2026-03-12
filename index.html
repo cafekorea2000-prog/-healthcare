@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URBAN FIT - Premium Diet Protocol</title>
+    <!-- Google Fonts: Pretendard for sophisticated urban typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Feather Icons for minimalist icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        urban: {
+                            900: '#0F1012', // Deep charcoal
+                            800: '#1A1C20', // Dark gray
+                            700: '#2A2C32', // Medium gray
+                            accent: '#A5B49C', // Muted olive green
+                            silver: '#D1D5DB'  // Silver text
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-urban-900 text-urban-silver font-sans overflow-hidden antialiased">
+    
+    <!-- App Layout -->
+    <div class="flex h-screen w-full max-w-[1600px] mx-auto relative">
+        
+        <!-- Sidebar Navigation -->
+        <nav class="w-64 bg-urban-800/80 backdrop-blur-xl border-r border-white/5 flex flex-col z-20 shadow-2xl">
+            <div class="p-8 border-b border-white/5 relative">
+                <div class="absolute top-8 right-8 flex items-center bg-urban-900 rounded-full p-1 border border-white/10 text-xs font-bold">
+                    <button id="lang-ko" class="px-2 py-1 rounded-full bg-urban-accent text-urban-900 transition-colors">KR</button>
+                    <button id="lang-en" class="px-2 py-1 rounded-full text-gray-500 hover:text-white transition-colors">EN</button>
+                </div>
+                <h1 class="text-3xl font-extrabold text-white tracking-tighter">
+                    URBAN<span class="text-urban-accent">FIT</span>
+                </h1>
+                <p class="text-xs text-gray-500 mt-2 tracking-widest uppercase" data-i18n="appSubtitle">Protocol</p>
+            </div>
+            
+            <div class="flex-1 py-6 flex flex-col gap-2 px-4" id="nav-menu">
+                <button data-target="view-plan" class="nav-btn active">
+                    <i data-feather="calendar" class="w-5 h-5"></i>
+                    <span data-i18n="navPlan">Plan & Protocol</span>
+                </button>
+                <button data-target="view-stories" class="nav-btn">
+                    <i data-feather="star" class="w-5 h-5"></i>
+                    <span data-i18n="navStories">Success Stories</span>
+                </button>
+                <button data-target="view-mindset" class="nav-btn">
+                    <i data-feather="heart" class="w-5 h-5"></i>
+                    <span data-i18n="navMindset">Mindset Clinic</span>
+                </button>
+                <button data-target="view-community" class="nav-btn">
+                    <i data-feather="users" class="w-5 h-5"></i>
+                    <span data-i18n="navCommunity">Community</span>
+                </button>
+            </div>
+
+            <div class="p-6 border-t border-white/5">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-urban-accent to-gray-600 flex items-center justify-center text-urban-900 font-bold">
+                        ME
+                    </div>
+                    <div>
+                        <p class="text-sm text-white font-medium" data-i18n="userGuest">Guest User</p>
+                        <p class="text-xs text-gray-500" data-i18n="userStatus">Ready to transform</p>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 h-full relative overflow-y-auto scroll-smooth custom-scrollbar" id="main-content">
+            
+            <!-- VIEW: Plan & Protocol -->
+            <section id="view-plan" class="view-section active p-10 max-w-6xl mx-auto h-full flex flex-col">
+                <header class="mb-10 animate-fade-in">
+                    <h2 class="text-sm font-bold text-urban-accent tracking-widest uppercase mb-2" data-i18n="goalSetup">Goal Setup</h2>
+                    <h3 class="text-4xl font-light text-white mb-6" data-i18n="goalQuestion">How much weight do you want to lose?</h3>
+                    
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <div class="flex justify-between items-end mb-4">
+                            <span class="text-lg text-gray-400" data-i18n="targetRange">Target Range</span>
+                            <span class="text-3xl font-bold text-white" id="goal-display">5 KG</span>
+                        </div>
+                        <input type="range" min="2" max="15" value="5" id="goal-slider" class="w-full custom-slider">
+                        <div class="flex justify-between mt-2 text-xs text-gray-500 font-medium">
+                            <span data-i18n="mildTarget">Mild (2kg)</span>
+                            <span data-i18n="intenseTarget">Intense (15kg)</span>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="flex flex-1 gap-8 animate-slide-up">
+                    <!-- Day Selector -->
+                    <div class="w-1/3 flex flex-col h-full bg-urban-800/40 rounded-2xl glass-panel overflow-hidden">
+                        <div class="p-5 border-b border-white/5 bg-urban-800/60 sticky top-0">
+                            <h4 class="font-semibold text-white" data-i18n="daysProtocol">30 Days Protocol</h4>
+                            <p class="text-xs text-urban-accent mt-1" id="protocol-tier-text">Standard Plan</p>
+                        </div>
+                        <div class="flex-1 overflow-y-auto p-3 custom-scrollbar" id="day-list">
+                            <!-- Days injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Day Details -->
+                    <div class="w-2/3 glass-panel rounded-3xl p-8 flex flex-col relative overflow-hidden group transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-br from-urban-accent/5 to-transparent z-0"></div>
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <h2 class="text-3xl font-bold text-white mb-2" id="day-title" data-i18n="loading">Loading...</h2>
+                                    <span class="inline-block px-4 py-1.5 rounded-full bg-urban-900/80 border border-urban-accent/30 text-urban-accent text-sm font-medium tracking-wide" id="calorie-badge">🔥 <span data-i18n="targetCal">Target</span> 0 kcal</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-4xl font-black text-white/10" id="current-day-large">01</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 mb-6" id="meal-grid">
+                                <!-- Meals injected here -->
+                            </div>
+
+                            <div class="bg-urban-900/50 rounded-xl p-5 border border-white/5 flex items-start gap-4">
+                                <i data-feather="activity" class="text-urban-accent"></i>
+                                <div>
+                                    <h4 class="text-white font-medium mb-1" data-i18n="todaysWorkout">Today's Workout</h4>
+                                    <p class="text-sm text-gray-400 leading-relaxed" id="workout-text">Workout text here.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-urban-accent/10 rounded-xl p-5 border border-urban-accent/20 flex items-start gap-4">
+                                <i data-feather="info" class="text-urban-accent"></i>
+                                <div>
+                                    <h4 class="text-urban-accent font-medium mb-1" data-i18n="expertTip">Expert Tip</h4>
+                                    <p class="text-sm text-gray-300 leading-relaxed" id="tip-text">Tip here.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: Success Stories -->
+            <section id="view-stories" class="view-section p-10 max-w-6xl mx-auto hidden">
+                <header class="mb-12">
+                    <h2 class="text-sm font-bold text-urban-accent tracking-widest uppercase mb-2" data-i18n="hallOfFame">Hall of Fame</h2>
+                    <h3 class="text-4xl font-light text-white mb-4" data-i18n="storiesTitle">Success Stories</h3>
+                    <p class="text-gray-400 max-w-2xl text-lg" data-i18n="storiesDesc">Real people, absolute dedication, and beautiful transformations. Proof that this protocol works.</p>
+                </header>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="stories-grid">
+                    <!-- Stories injected here -->
+                </div>
+            </section>
+
+            <!-- VIEW: Mindset Clinic -->
+            <section id="view-mindset" class="view-section p-10 max-w-5xl mx-auto hidden">
+                <header class="mb-12 text-center">
+                    <i data-feather="wind" class="w-12 h-12 text-urban-accent mx-auto mb-6"></i>
+                    <h2 class="text-sm font-bold text-gray-400 tracking-widest uppercase mb-2" data-i18n="mentalRecovery">Mental Recovery</h2>
+                    <h3 class="text-4xl font-light text-white mb-4" data-i18n="mindsetClinic">Mindset Clinic</h3>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-lg hover-text" data-i18n="mindsetDesc">Weight loss is 80% mental. Find your focus here.</p>
+                </header>
+
+                <div class="space-y-6" id="mindset-list">
+                    <!-- Mindset texts injected here -->
+                </div>
+            </section>
+
+            <!-- VIEW: Community -->
+            <section id="view-community" class="view-section p-10 max-w-4xl mx-auto hidden">
+                <header class="mb-10 flex justify-between items-end">
+                    <div>
+                        <h2 class="text-sm font-bold text-urban-accent tracking-widest uppercase mb-2" data-i18n="urbanSocial">Urban Social</h2>
+                        <h3 class="text-4xl font-light text-white" data-i18n="communityFeed">Community Feed</h3>
+                    </div>
+                    <button id="btn-upload" class="bg-urban-accent hover:bg-urban-accent/80 text-urban-900 font-bold py-2.5 px-6 rounded-full transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(165,180,156,0.3)]">
+                        <i data-feather="plus" class="w-4 h-4"></i> <span data-i18n="postUpdate">Post Update</span>
+                    </button>
+                    <!-- Hidden File Input -->
+                    <input type="file" id="file-upload" class="hidden" accept="image/*,video/*">
+                </header>
+
+                <!-- Post Upload Modal Simulation -->
+                <div id="upload-panel" class="hidden mb-8 glass-panel p-6 rounded-2xl animate-fade-in border border-urban-accent/30">
+                    <div class="flex gap-4">
+                        <div id="preview-container" class="w-32 h-32 bg-urban-900 rounded-xl overflow-hidden flex-shrink-0 border border-white/10 hidden items-center justify-center">
+                            <!-- Preview image/video goes here -->
+                        </div>
+                        <div class="flex-1">
+                            <textarea id="post-text" data-i18n-placeholder="sharePlaceholder" placeholder="Share your daily check-in, diet photo, or workout routine..." class="w-full bg-urban-900/50 border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-urban-accent resize-none h-24 mb-4"></textarea>
+                            <div class="flex justify-end gap-3">
+                                <button id="btn-cancel-post" class="px-5 py-2 rounded-full text-gray-400 hover:text-white transition-colors" data-i18n="cancel">Cancel</button>
+                                <button id="btn-submit-post" class="px-5 py-2 bg-white text-urban-900 font-bold rounded-full hover:bg-gray-200 transition-colors shadow-lg" data-i18n="sharePost">Share Post</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-8" id="community-feed">
+                    <!-- Feed items injected here -->
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modals, Notifications -->
+    <div id="toast" class="fixed bottom-10 right-10 bg-urban-800 text-white px-6 py-4 rounded-xl shadow-2xl border border-white/10 transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-3">
+        <i data-feather="check-circle" class="text-urban-accent"></i>
+        <span id="toast-msg" data-i18n="successToast">Action successful</span>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Init icons
+        feather.replace();
+    </script>
+</body>
+</html>
